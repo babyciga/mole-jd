@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超级拉姆月卡 - 商品详情</title>
+    <style>
+        /* 复用部分首页样式，保持风格统一 */
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background-color: #f0f3ef;
+            margin: 0;
+            color: #333;
+        }
+        
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 顶部导航简易版 */
+        .top-nav {
+            background-color: #e3e4e5;
+            height: 30px;
+            line-height: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumb a {
+            text-decoration: none;
+            color: #666;
+            margin: 0 5px;
+        }
+
+        /* 商品详情区 */
+        .product-detail {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            gap: 40px;
+        }
+
+        /* 左侧图片 */
+        .preview-img {
+            width: 400px;
+            height: 400px;
+            background-color: #f8f8f8;
+            border: 1px solid #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .preview-img img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* 右侧信息 */
+        .item-info {
+            flex: 1;
+        }
+
+        .sku-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .price-box {
+            background-color: #f3f3f3;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .price {
+            color: #e4393c;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .price::before {
+            content: "¥";
+            font-size: 16px;
+            margin-right: 5px;
+        }
+
+        .btn-add-cart {
+            background-color: #df3033;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .btn-add-cart:hover {
+            background-color: #be2527;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">首页</a> > <a href="#">摩尔会员</a> > 超级拉姆月卡
+            </div>
+        </div>
+    </div>
+
+    <div class="container product-detail">
+        <div class="preview-img">
+            <!-- 这里引用您的图片，如果还没放图片，会显示文字 -->
+            <img src="images/super-lamu.jpg" alt="超级拉姆" onerror="this.style.display='none'; this.parentNode.innerHTML='请将图片命名为 super-lamu.jpg 放入 images 文件夹'">
+        </div>
+        
+        <div class="item-info">
+            <div class="sku-name">
+                超级拉姆月卡 尊贵特权 每日领取金豆 专属道具礼包
+            </div>
+            <div class="price-box">
+                <span style="color: #999; margin-right: 10px;">摩尔价</span>
+                <span class="price">9.90</span>
+            </div>
+            
+            <div style="margin-bottom: 20px; color: #666; font-size: 14px;">
+                <p>特权说明：</p>
+                <ul style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                    <li>金色昵称显示</li>
+                    <li>每周领取超级拉姆专属礼包</li>
+                    <li>家园扩建上限提升</li>
+                    <li>好友上限增加</li>
+                </ul>
+            </div>
+            
+            <button class="btn-add-cart" onclick="alert('加入购物车成功！')">加入购物车</button>
+        </div>
+    </div>
+
+</body>
+</html>
