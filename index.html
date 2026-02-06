@@ -6,431 +6,78 @@
     <title>摩尔购 - 摩尔庄园正品购物平台</title>
     <style>
         /* 全局重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Microsoft YaHei", sans-serif; background-color: #f0f3ef; color: #333; }
+        a { text-decoration: none; color: #666; font-size: 12px; }
+        a:hover { color: #FF4500; }
 
-        body {
-            font-family: "Microsoft YaHei", sans-serif;
-            background-color: #f0f3ef; /* 浅色背景 */
-            color: #333;
-        }
-
-        a {
-            text-decoration: none;
-            color: #666;
-            font-size: 12px;
-        }
-
-        a:hover {
-            color: #FF4500; /* 摩尔红 */
-        }
-
-        /* 顶部导航条 */
-        .top-nav {
-            background-color: #e3e4e5;
-            border-bottom: 1px solid #ddd;
-            height: 30px;
-            line-height: 30px;
-        }
-
-        .container {
-            width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .top-nav-left {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .top-nav-right ul {
-            display: flex;
-            list-style: none;
-            gap: 15px;
-        }
-
-        .location {
-            color: #FF4500;
-        }
+        /* 顶部导航 */
+        .top-nav { background-color: #e3e4e5; border-bottom: 1px solid #ddd; height: 30px; line-height: 30px; }
+        .container { width: 1200px; margin: 0 auto; }
+        .top-nav .container { display: flex; justify-content: space-between; }
+        .top-nav-left { display: flex; gap: 15px; }
+        .top-nav-right ul { display: flex; list-style: none; gap: 15px; }
+        .location { color: #FF4500; }
 
         /* 头部搜索区 */
-        .header {
-            background-color: #fff;
-            padding: 20px 0;
-            border-bottom: 2px solid #87CEEB; /* 天空蓝边框 */
-        }
+        .header { background-color: #fff; padding: 20px 0; border-bottom: 2px solid #87CEEB; }
+        .header-inner { display: flex; align-items: center; height: 100px; }
+        .logo { width: 190px; height: 120px; background-color: #FF4500; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 32px; font-weight: bold; border-radius: 20px; box-shadow: 0 4px 0 #8B4513; margin-right: 20px; position: relative; top: -10px; }
+        .logo span { font-size: 14px; margin-top: 5px; }
+        .search-box { flex: 1; margin-left: 50px; }
+        .search-form { display: flex; width: 550px; height: 40px; border: 2px solid #FF4500; background-color: #FF4500; }
+        .search-input { flex: 1; border: none; padding: 10px; outline: none; font-size: 14px; }
+        .search-btn { width: 60px; background-color: #FF4500; border: none; color: white; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .hot-words { margin-top: 8px; font-size: 12px; color: #999; }
+        .hot-words a { margin-right: 10px; color: #999; }
+        .my-cart { width: 130px; height: 38px; border: 1px solid #ddd; background-color: #fff; text-align: center; line-height: 38px; color: #FF4500; margin-left: 30px; font-size: 14px; border-radius: 19px; }
+        .nav-items { margin-top: 20px; font-size: 16px; font-weight: bold; color: #333; }
+        .nav-items a { font-size: 16px; color: #333; margin-right: 25px; }
+        .nav-items a:hover { color: #FF4500; }
 
-        .header-inner {
-            display: flex;
-            align-items: center;
-            height: 100px;
-        }
-
-        .logo {
-            width: 190px;
-            height: 120px;
-            background-color: #FF4500; /* 模拟LOGO */
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 32px;
-            font-weight: bold;
-            border-radius: 20px;
-            box-shadow: 0 4px 0 #8B4513;
-            margin-right: 20px;
-            position: relative;
-            top: -10px;
-        }
+        /* === 布局核心修改：使用 Flex 而不是 Grid，避免错乱 === */
+        .main-content { margin-top: 10px; }
         
-        .logo span {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .search-box {
-            flex: 1;
-            margin-left: 50px;
-        }
-
-        .search-form {
-            display: flex;
-            width: 550px;
-            height: 40px;
-            border: 2px solid #FF4500;
-            background-color: #FF4500;
-        }
-
-        .search-input {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .search-btn {
-            width: 60px;
-            background-color: #FF4500;
-            border: none;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+        /* 第一行：分类 + 轮播 + 用户 */
+        .first-screen { display: flex; height: 480px; gap: 10px; margin-bottom: 20px; }
         
-        .hot-words {
-            margin-top: 8px;
-            font-size: 12px;
-            color: #999;
-        }
-        
-        .hot-words a {
-            margin-right: 10px;
-            color: #999;
-        }
-        
-        .hot-words a.highlight {
-            color: #FF4500;
-        }
+        .category-menu { width: 190px; background-color: #fff; padding: 10px 0; border-radius: 8px; flex-shrink: 0; }
+        .category-item { padding: 8px 12px; font-size: 14px; color: #666; cursor: pointer; transition: background 0.2s; }
+        .category-item:hover { background-color: #d9f5ff; color: #FF4500; }
 
-        .my-cart {
-            width: 130px;
-            height: 38px;
-            border: 1px solid #ddd;
-            background-color: #fff;
-            text-align: center;
-            line-height: 38px;
-            color: #FF4500;
-            margin-left: 30px;
-            font-size: 14px;
-            border-radius: 19px; /* 圆角 */
-        }
+        .slider-area { flex: 1; background-color: #90EE90; border-radius: 12px; display: flex; justify-content: center; align-items: center; color: #fff; font-size: 24px; background-image: linear-gradient(to bottom right, #87CEEB, #90EE90); position: relative; overflow: hidden; }
+        .slider-area::after { content: "摩尔大促销 - 全场五折"; position: absolute; font-size: 40px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
 
-        /* 导航菜单 */
-        .nav-items {
-            margin-top: 20px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .nav-items a {
-            font-size: 16px;
-            color: #333;
-            margin-right: 25px;
-        }
-        
-        .nav-items a:hover {
-            color: #FF4500;
-        }
+        .user-panel { width: 190px; background-color: #fff; border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+        .user-info { display: flex; flex-direction: column; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .avatar { width: 60px; height: 60px; background-color: #FFD700; border-radius: 50%; margin-bottom: 10px; border: 3px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .user-actions { display: flex; gap: 10px; }
+        .btn { padding: 5px 15px; border-radius: 15px; font-size: 12px; cursor: pointer; }
+        .btn-primary { background-color: #FF4500; color: white; border: none; }
+        .btn-secondary { background-color: #333; color: #e3e4e5; border: none; }
+        .news-list h4 { font-size: 14px; margin-bottom: 8px; color: #333; }
+        .news-item { font-size: 12px; color: #666; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .tag { color: #FF4500; background: #fef0ef; padding: 0 2px; margin-right: 5px; }
 
-        /* 主体内容区 */
-        .main-content {
-            margin-top: 10px;
-        }
+        /* 第二行：摩尔秒杀 */
+        .seckill-section { background-color: #fff; height: 260px; border-radius: 8px; display: flex; overflow: hidden; margin-bottom: 20px; border: 1px solid #e83632; }
+        .seckill-countdown { width: 190px; background-color: #e83632; color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; flex-shrink: 0; }
+        .seckill-title { font-size: 30px; font-weight: bold; margin-bottom: 20px; }
+        .timer { font-size: 18px; font-weight: bold; }
+        .product-list { flex: 1; display: flex; align-items: center; justify-content: space-around; padding: 0 20px; }
+        .product-card { width: 160px; display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+        .product-img { width: 140px; height: 140px; background-color: #f8f8f8; margin-bottom: 10px; display: flex; justify-content: center; align-items: center; color: #999; font-size: 12px; border-radius: 8px; }
+        .product-name { font-size: 12px; color: #333; margin-bottom: 5px; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .product-price { width: 100%; height: 24px; background: #e83632; color: #fff; text-align: center; line-height: 24px; font-weight: bold; border-radius: 12px; }
 
-        .grid-layout {
-            display: grid;
-            grid-template-columns: 190px 1fr 190px;
-            gap: 10px;
-            height: 480px;
-        }
-
-        /* 左侧分类 */
-        .category-menu {
-            background-color: #fff;
-            padding: 10px 0;
-            border-radius: 8px; /* 圆角风格 */
-        }
-
-        .category-item {
-            padding: 8px 12px;
-            font-size: 14px;
-            color: #666;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .category-item:hover {
-            background-color: #d9f5ff; /* 浅蓝悬停 */
-            color: #FF4500;
-        }
-
-        /* 中间轮播图 */
-        .slider-area {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 10px;
-        }
-
-        .slider-main {
-            background-color: #90EE90; /* 草地绿背景 */
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 24px;
-            background-image: linear-gradient(to bottom right, #87CEEB, #90EE90);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .slider-main::after {
-            content: "摩尔大促销 - 全场五折";
-            position: absolute;
-            font-size: 40px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        /* 右侧用户栏 */
-        .user-panel {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .user-info {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .avatar {
-            width: 60px;
-            height: 60px;
-            background-color: #FFD700;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 3px solid #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .user-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn {
-            padding: 5px 15px;
-            border-radius: 15px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        
-        .btn-primary {
-            background-color: #FF4500;
-            color: white;
-            border: none;
-        }
-        
-        .btn-secondary {
-            background-color: #333;
-            color: #e3e4e5;
-            border: none;
-        }
-
-        .news-list h4 {
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: #333;
-        }
-        
-        .news-item {
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .tag {
-            color: #FF4500;
-            background: #fef0ef;
-            padding: 0 2px;
-            margin-right: 5px;
-        }
-
-        /* 摩尔秒杀 */
-        .seckill-section {
-            margin-top: 20px;
-            background-color: #fff;
-            height: 260px;
-            border-radius: 8px;
-            display: flex;
-            overflow: hidden;
-        }
-
-        .seckill-countdown {
-            width: 190px;
-            background-color: #e83632;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
-        }
-        
-        .seckill-title {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .timer {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .product-list {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 0 20px;
-        }
-
-        .product-card {
-            width: 160px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .product-img {
-            width: 140px;
-            height: 140px;
-            background-color: #f8f8f8;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #999;
-            font-size: 12px;
-            border-radius: 8px;
-        }
-
-        .product-name {
-            font-size: 12px;
-            color: #333;
-            margin-bottom: 5px;
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .product-price {
-            width: 100%;
-            height: 24px;
-            background: #e83632;
-            color: #fff;
-            text-align: center;
-            line-height: 24px;
-            font-weight: bold;
-            border-radius: 12px; /* 胶囊形状 */
-        }
-
-        /* 频道广场 */
-        .channel-square {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            height: 300px;
-        }
-
-        .channel-item {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-        
-        .channel-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .channel-title {
-            font-size: 22px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .channel-sub {
-            font-size: 14px;
-            color: #999;
-            margin-bottom: 15px;
-        }
-        
-        .channel-imgs {
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        .small-img {
-            width: 100px;
-            height: 100px;
-            background-color: #f0f3ef;
-            border-radius: 8px;
-        }
+        /* 第三行：频道广场 */
+        .channel-square { display: flex; gap: 10px; height: 300px; }
+        .channel-item { flex: 1; background-color: #fff; border-radius: 8px; padding: 20px; transition: transform 0.3s; }
+        .channel-item:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .channel-title { font-size: 22px; font-weight: bold; color: #333; margin-bottom: 5px; }
+        .channel-sub { font-size: 14px; color: #999; margin-bottom: 15px; }
+        .channel-imgs { display: flex; justify-content: space-between; }
+        .small-img { width: 100px; height: 100px; background-color: #f0f3ef; border-radius: 8px; }
 
     </style>
 </head>
@@ -501,7 +148,9 @@
 
     <!-- 主体内容 -->
     <div class="container main-content">
-        <div class="grid-layout">
+        
+        <!-- 第一行：分类 + 轮播 + 用户 -->
+        <div class="first-screen">
             <!-- 左侧分类 -->
             <div class="category-menu">
                 <div class="category-item">拉姆食品 / 用品</div>
@@ -518,9 +167,7 @@
 
             <!-- 中间轮播 -->
             <div class="slider-area">
-                <div class="slider-main">
-                    <!-- 这里可以用图片替换 -->
-                </div>
+                <!-- 这里可以用图片替换 -->
             </div>
 
             <!-- 右侧用户 -->
@@ -543,7 +190,7 @@
             </div>
         </div>
 
-        <!-- 摩尔秒杀 -->
+        <!-- 第二行：摩尔秒杀 -->
         <div class="seckill-section">
             <div class="seckill-countdown">
                 <div class="seckill-title">摩尔秒杀</div>
@@ -552,12 +199,12 @@
             </div>
             <div class="product-list">
                 <!-- 给第一个商品加了链接，点击跳转到 product.html -->
-                <a href="product.html" class="product-card" style="text-decoration: none;">
+                <a href="product.html" class="product-card" style="text-decoration: none; border: 2px solid yellow; background: #fff;">
                     <div class="product-img">
                         <!-- 这里也尝试加载图片，如果失败则显示文字 -->
-                        <img src="images/super-lamu.jpg" alt="超级拉姆" style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerText='超级拉姆月卡'">
+                        <img src="images/super-lamu.jpg" alt="超级拉姆" style="width:100%; height:100%; object-fit:contain;" onerror="this.style.display='none'; this.parentNode.innerText='点这里购买超级拉姆月卡'">
                     </div>
-                    <div class="product-name">超级拉姆月卡 尊贵特权</div>
+                    <div class="product-name" style="color: red; font-weight: bold;">超级拉姆月卡 (点我跳转)</div>
                     <div class="product-price">¥ 9.90</div>
                 </a>
                 <div class="product-card">
@@ -578,7 +225,7 @@
             </div>
         </div>
 
-        <!-- 频道广场 -->
+        <!-- 第三行：频道广场 -->
         <div class="channel-square">
             <div class="channel-item">
                 <div class="channel-title">摩尔超市</div>
