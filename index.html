@@ -91,8 +91,8 @@
             </div>
             <div class="top-nav-right">
                 <ul>
-                    <li><a href="#">你好，小摩尔！请登录</a></li>
-                    <li><a href="#" style="color: #FF4500;">免费注册</a></li>
+                    <li><a href="login.html" id="login-link">你好，小摩尔！请登录</a></li>
+                    <li><a href="#" style="color: #FF4500;" id="reg-link">免费注册</a></li>
                     <li>|</li>
                     <li><a href="#">我的订单</a></li>
                     <li><a href="#">我的摩尔</a></li>
@@ -140,9 +140,9 @@
             </div>
             
             <!-- 购物车 -->
-            <div class="my-cart">
-                我的购物车 0
-            </div>
+            <a href="cart.html" class="my-cart" id="mini-cart" style="text-decoration: none;">
+                我的购物车 <span id="cart-num">0</span>
+            </a>
         </div>
     </div>
 
@@ -174,9 +174,9 @@
             <div class="user-panel">
                 <div class="user-info">
                     <div class="avatar"></div>
-                    <p style="font-size: 14px; color: #666;">Hi~ 欢迎来摩尔购！</p>
-                    <div class="user-actions" style="margin-top: 10px;">
-                        <button class="btn btn-primary">登录</button>
+                    <p style="font-size: 14px; color: #666;" id="user-greeting">Hi~ 欢迎来摩尔购！</p>
+                    <div class="user-actions" style="margin-top: 10px;" id="user-btn-box">
+                        <button class="btn btn-primary" onclick="window.location.href='login.html'">登录</button>
                         <button class="btn btn-secondary">注册</button>
                     </div>
                 </div>
@@ -265,6 +265,40 @@
     <div style="text-align: center; margin: 40px 0; color: #999; font-size: 12px;">
         Copyright © 2024-2026 摩尔购 MoleBuy.com 版权所有
     </div>
+
+    <script>
+        // 页面加载逻辑
+        window.onload = function() {
+            // 1. 检查登录状态
+            const user = localStorage.getItem('moleUser');
+            if (user) {
+                // 更新顶部导航
+                const loginLink = document.getElementById('login-link');
+                loginLink.innerText = '你好，' + user;
+                loginLink.href = '#'; // 登录后点这个就不跳登录页了
+                
+                // 隐藏注册链接，或者改成退出
+                const regLink = document.getElementById('reg-link');
+                regLink.innerText = '退出';
+                regLink.href = 'javascript:logout()';
+                
+                // 更新用户面板
+                document.getElementById('user-greeting').innerText = 'Hi~ ' + user;
+                
+                // 隐藏登录注册按钮，显示欢迎
+                document.getElementById('user-btn-box').innerHTML = '<span style="font-size:12px; color:#FF4500;">摩尔庄园欢迎你回家！</span>';
+            }
+
+            // 2. 更新购物车数量
+            const count = localStorage.getItem('cartCount') || 0;
+            document.getElementById('cart-num').innerText = count;
+        };
+
+        function logout() {
+            localStorage.removeItem('moleUser');
+            location.reload();
+        }
+    </script>
 
 </body>
 </html>

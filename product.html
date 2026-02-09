@@ -143,9 +143,27 @@
                 </ul>
             </div>
             
-            <button class="btn-add-cart" onclick="alert('加入购物车成功！')">加入购物车</button>
+            <button class="btn-add-cart" onclick="addToCart()">加入购物车</button>
         </div>
     </div>
+
+    <script>
+        function addToCart() {
+            // 1. 获取当前数量
+            let count = Number(localStorage.getItem('cartCount') || 0);
+            
+            // 2. 数量+1
+            count++;
+            
+            // 3. 存回去
+            localStorage.setItem('cartCount', count);
+            
+            // 4. 提示
+            if(confirm('加入购物车成功！当前购物车共有 ' + count + ' 件商品。\n是否去购物车结算？')) {
+                window.location.href = 'cart.html';
+            }
+        }
+    </script>
 
 </body>
 </html>
