@@ -149,17 +149,41 @@
 
     <script>
         function addToCart() {
-            // 1. 获取当前数量
-            let count = Number(localStorage.getItem('cartCount') || 0);
+            // 1. 获取商品信息 (这里先写死当前页面的商品，以后可以动态获取)
+            const product = {
+                id: 'super-lamu',
+                name: '超级拉姆月卡 尊贵特权',
+                price: 9.90,
+                img: 'images/super-lamu.jpg',
+                count: 1
+            };
+
+            // 2. 获取购物车列表
+            let cartList = JSON.parse(localStorage.getItem('cartList') || '[]');
             
-            // 2. 数量+1
-            count++;
+            // 3. 检查是否已存在
+            let found = false;
+            for(let item of cartList) {
+                if(item.id === product.id) {
+                    item.count++;
+                    found = true;
+                    break;
+                }
+            }
+            if(!found) {
+                cartList.push(product);
+            }
             
-            // 3. 存回去
-            localStorage.setItem('cartCount', count);
+            // 4. 存回 LocalStorage
+            localStorage.setItem('cartList', JSON.stringify(cartList));
             
-            // 4. 提示
-            if(confirm('加入购物车成功！当前购物车共有 ' + count + ' 件商品。\n是否去购物车结算？')) {
+            // 5. 更新总数量用于首页显示
+            let totalCount = 0;
+            for(let item of cartList) totalCount += item.count;
+            localStorage.setItem('cartCount', totalCount);
+            
+            // 6. 提示
+            if(confirm('加入购物车成功！当前购物车共有 ' + totalCount + ' 件商品。\n是否去购物车结算？')) {
                 window.location.href = 'cart.html';
             }
         }
